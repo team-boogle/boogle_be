@@ -1,24 +1,27 @@
 {
-  "name": "boogle_be",
+  "name": "boogle_be_test",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "src/index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node ./src/server.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/team-boogle/boogle_be.git"
-  },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "1234"
+  ],
+  "author": "sseongyunn",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/team-boogle/boogle_be/issues"
-  },
-  "homepage": "https://github.com/team-boogle/boogle_be#readme",
   "description": "",
   "dependencies": {
-    "express": "^5.1.0"
+    "bootstrap": "^5.3.5",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "pug": "^3.0.3"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.27.1",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0"
   }
 }
