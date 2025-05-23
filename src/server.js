@@ -1,34 +1,21 @@
 const express = require('express');
-const fs = require('fs');
-const app = express();
+const loadDictionary = require('./utils/loaddictionary');
+const dictionaryRoutes = require('./routes/dictionaryRoutes');
+const { setDictionary } = require('./controllers/dictionaryController');
 
+const app = express();
 app.use(express.json());
 
-const wordSet = new Set();
+// dictionary loading
+const dictionaryPath = './dictionary.txt';
+const wordSet = loadDictionary(dictionaryPath);
+setDictionary(wordSet);
+console.log(`${wordSet.size}개 단어 로딩 완료`);
 
-const dictionaryPath = './dictionary.txt'; 
-const lines = fs.readFileSync(dictionaryPath, 'utf-8').split('\n');
-lines.forEach(line => {
-  const word = line.trim();
-  if (word) {
-    wordSet.add(word);
-  }
-});
+// routes
+app.use('/', dictionaryRoutes);
 
-console.log(`✅ ${wordSet.size}개 단어 로딩 완료`);
-
-// 단어 유효성 검사
-app.post('/check-word', (req, res) => {
-  const { word } = req.body;
-  
-  if (!word) {
-    return res.status(400).json({ success: false, message: 'require valid word.' });
-  }
-
-  const isValid = wordSet.has(word);
-  res.json({ success: true, isValid });
-});
-
+// server 
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`server ongoing: http://localhost:${PORT}`);
