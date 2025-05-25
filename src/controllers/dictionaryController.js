@@ -6,6 +6,7 @@ function setDictionary(set) {
 
 function checkWord(req, res) {
   const { word } = req.body;
+  console.log(word);
   if (!word) {
     return res.status(400).json({ success: false, message: 'require valid word.' });
   }
