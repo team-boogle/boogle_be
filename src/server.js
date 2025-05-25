@@ -2,6 +2,7 @@ const express = require('express');
 const loadDictionary = require('./utils/loaddictionary');
 const dictionaryRoutes = require('./routes/dictionaryRoutes');
 const { setDictionary } = require('./controllers/dictionaryController');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 app.use(express.json());
@@ -14,6 +15,8 @@ console.log(`${wordSet.size}개 단어 로딩 완료`);
 
 // routes
 app.use('/', dictionaryRoutes);
+app.use('/api/users', userRoutes);
+
 
 // server 
 const PORT = 3000;
