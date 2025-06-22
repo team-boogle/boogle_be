@@ -10,7 +10,7 @@ const signRoutes = require('./routes/signRoutes');
 const app = express();
 
 app.use(cors({
-  origin: ['http://localhost:3000','http://43.201.73.158'],  // 프론트엔드가 구동 중인 주소
+  origin: ['http://localhost:3000','http://52.79.237.224'],  // 프론트엔드가 구동 중인 주소
   credentials: true                 // 필요 시, 쿠키/세션도 허용
 }));
 
