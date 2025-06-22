@@ -1,6 +1,14 @@
 const db = require('../config/db');
 const bcrypt = require('bcrypt');
 
+// checkauth
+exports.checkAuth = (req, res) => {
+  return res.status(200).json({
+    success: true,
+    message: '로그인된 상태입니다.',
+    user: req.user, // 필요시 프론트에 제공
+  });
+};
 
 //gettoprankers, updatepassword, editprofile
 
