@@ -8,12 +8,24 @@ const getByEmail = async (email) => {
     return result[0];
 }
 
-const createUser = async (email, password, nickName) => {
+const findByNickname = async (nickName) => {
+  const [rows] = await runQuery('SELECT * FROM users WHERE nickname = ?', [nickName]);
+  return rows;
+};
+
+const findByEmail = async (email) => {
+  const [rows] = await runQuery('SELECT * FROM users WHERE email = ?', [email]);
+  return rows;
+};
+
+const createUser = async (user) => {
     const sql = 'INSERT INTO users (email, password, nickName) VALUES (?, ?, ?)';
-    await runQuery(sql, [email, password, nickName]);
+    await runQuery(sql, [user.email, user.password, user.nickName]);
 }
 
 module.exports = {
     getByEmail,
+    findByNickname,
+    findByEmail,
     createUser,
 };
