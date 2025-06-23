@@ -56,7 +56,8 @@ exports.signUp = async (req, res, next) => {
 // login
 exports.signIn = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
+    const email = username;
 
     if (!email || !password)
       return res.status(400).json({ success: false, message: 'Missing credentials' });
@@ -71,7 +72,7 @@ exports.signIn = async (req, res, next) => {
 
     req.session.user = { email };
 
-    return res.json({ success: true, message: 'Login success', email: email });
+    return res.json({ success: true, message: 'Login success', username: email, nickname: user.nickname ,bg_color : user.bg_color, profile_image: user.profile_image, highScore : user.max_score });
 
   } catch (err) {
     return next(err);

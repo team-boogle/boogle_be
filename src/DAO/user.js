@@ -1,7 +1,7 @@
 const {runQuery} = require("../config/db");
 
 const getByEmail = async (email) => {
-    const sql = 'SELECT email, nickName, password ' +
+    const sql = 'SELECT email, nickname, password, bg_color, profile_image, max_score ' +
     'FROM users WHERE email = ?';
 
     const result = await runQuery(sql, [email]);
