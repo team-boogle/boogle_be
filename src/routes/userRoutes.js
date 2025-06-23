@@ -8,7 +8,7 @@ const { updatePassword } = require('../controllers/userController');
 const { updateProfile } = require('../controllers/userController');
 const { getMyInfo } = require('../controllers/userController');
 const { checkAuth } = require('../controllers/userController');
-const {updateSCore} = require('../controllers/userController')
+const {updateScore} = require('../controllers/userController')
 
 router.get('/rankings', getTopRankers);
 
