@@ -106,3 +106,37 @@ exports.getMyInfo = async (req, res) => {
     res.status(500).json({ success: false, message: '서버 오류' });
   }
 };
+
+exports.updateScore = async (req, res) => {
+  const { score } = req.body;
+  const email = req.user.email; 
+
+  if (typeof score !== 'number') {
+    return res.status(400).json({ success: false, message: 'score는 숫자여야 합니다.' });
+  }
+
+  try {
+    const [rows] = await db.execute(
+      'SELECT max_score FROM users WHERE email = ?',
+      [email]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({ success: false, message: '사용자를 찾을 수 없습니다.' });
+    }
+
+    const currentMax = rows[0].max_score;
+
+    if (score > currentMax) {
+      await db.execute(
+        'UPDATE users SET max_score = ? WHERE email = ?',
+        [score, email]
+      );
+    }
+
+    return res.json({ success: true, message: '점수 기록 처리 완료' });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ success: false, message: '서버 오류' });
+  }
+};
